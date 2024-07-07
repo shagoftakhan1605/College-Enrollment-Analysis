@@ -115,7 +115,7 @@ This project demonstrates a comprehensive approach to managing and visualizing c
 
 ## Acknowledgments
 
-- Thanks to [Your Institution/Company] for providing the data and resources.
+- Thanks to Kaggle for providing the data and resources.
 - Special thanks to the Tableau community for their support and resources.
 
 By following these instructions, users should be able to recreate the analysis and gain insights from the data. The provided MySQL code and Tableau workbook are essential components of this project, ensuring the database is properly set up and the visualizations are accurately represented.
