@@ -79,10 +79,14 @@ IGNORE 1 ROWS
 1. **Male Population Analysis:**
    - **Description:** This dashboard visualizes the distribution of the male population across different education levels and ethnic groups.
    - **Key Features:** Tree plots representing education levels and bubble density indicating population size. Bar charts show the ethnic distribution of male students.
+![Man Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/ed4ea0a4-dfd5-4dc7-a251-947e59e152dd)
+
 
 2. **Female Population Analysis:**
    - **Description:** This dashboard visualizes the distribution of the female population across different education levels and ethnic groups.
    - **Key Features:** Similar to the male analysis, this dashboard includes tree plots and bar charts to represent the demographic distribution of female students.
+![Woman Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/33c4886a-e50e-4bfa-a65d-248570a264ae)
+
 
 ### Analysis Insights
 
