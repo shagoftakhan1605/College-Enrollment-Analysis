@@ -4,6 +4,33 @@
 
 This project involves a comprehensive analysis of college enrollment demographics using a dynamic data management and visualization approach. By creating a MySQL database to store the enrollment dataset and utilizing Tableau for interactive visualizations, this project aims to provide real-time insights into the demographic distribution of students based on gender and ethnic origin.
 
+## Data Visualization (Tableau)
+
+### Dashboards
+
+1. **Male Population Analysis:**
+   - **Description:** This dashboard visualizes the distribution of the male population across different education levels and ethnic groups.
+   - **Key Features:** Tree plots representing education levels and bubble density indicating population size. Bar charts show the ethnic distribution of male students.
+![Man Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/ed4ea0a4-dfd5-4dc7-a251-947e59e152dd)
+
+
+2. **Female Population Analysis:**
+   - **Description:** This dashboard visualizes the distribution of the female population across different education levels and ethnic groups.
+   - **Key Features:** Similar to the male analysis, this dashboard includes tree plots and bar charts to represent the demographic distribution of female students.
+![Woman Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/33c4886a-e50e-4bfa-a65d-248570a264ae)
+
+
+### Analysis Insights
+
+- **Male Population:**
+  - Higher density near the outer rings of the tree plot indicates a larger male population at undergraduate levels compared to graduate levels.
+  - White men have the highest representation, with minority groups like Hispanic and African American men having lower enrollment numbers, especially in graduate programs.
+
+- **Female Population:**
+  - Similar trends are observed for the female population, with higher enrollment at the undergraduate level.
+  - White women dominate the enrollment statistics, with lower representation from minority groups in graduate programs.
+
+
 ## Project Structure
 
 1. **Database Creation and Management:**
@@ -72,31 +99,6 @@ IGNORE 1 ROWS
  Non_Resident_Alien_Men, Non_Resident_Alien_Women);
 ```
 
-## Data Visualization (Tableau)
-
-### Dashboards
-
-1. **Male Population Analysis:**
-   - **Description:** This dashboard visualizes the distribution of the male population across different education levels and ethnic groups.
-   - **Key Features:** Tree plots representing education levels and bubble density indicating population size. Bar charts show the ethnic distribution of male students.
-![Man Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/ed4ea0a4-dfd5-4dc7-a251-947e59e152dd)
-
-
-2. **Female Population Analysis:**
-   - **Description:** This dashboard visualizes the distribution of the female population across different education levels and ethnic groups.
-   - **Key Features:** Similar to the male analysis, this dashboard includes tree plots and bar charts to represent the demographic distribution of female students.
-![Woman Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/33c4886a-e50e-4bfa-a65d-248570a264ae)
-
-
-### Analysis Insights
-
-- **Male Population:**
-  - Higher density near the outer rings of the tree plot indicates a larger male population at undergraduate levels compared to graduate levels.
-  - White men have the highest representation, with minority groups like Hispanic and African American men having lower enrollment numbers, especially in graduate programs.
-
-- **Female Population:**
-  - Similar trends are observed for the female population, with higher enrollment at the undergraduate level.
-  - White women dominate the enrollment statistics, with lower representation from minority groups in graduate programs.
 
 ## How to Run the Project
 
