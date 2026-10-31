@@ -1,127 +1,82 @@
-# College-Enrollment-Analysis
+# College Enrollment Analysis (MySQL + Tableau)
 
-## Project Overview
+Enrollment counts for US colleges in 2021, broken down by sex and ethnicity, are loaded into a MySQL database and explored in a Tableau workbook with two dashboard stories (male and female students).
 
-This project involves a comprehensive analysis of college enrollment demographics using a dynamic data management and visualization approach. By creating a MySQL database to store the enrollment dataset and utilizing Tableau for interactive visualizations, this project aims to provide real-time insights into the demographic distribution of students based on gender and ethnic origin.
+**Files**
+* `Dataset - 2021.csv`: the data (103,603 rows, 6,086 institutions)
+* `database.sql`: creates the `uni_demo` database and `demo_table`, and loads the CSV
+* `College Enrollment Tableau Workbook.twb`: Tableau workbook connected to the MySQL table
 
-## Data Visualization (Tableau)
+---
 
-### Dashboards
+## Dashboards
 
-1. **Male Population Analysis:**
-   - **Description:** This dashboard visualizes the distribution of the male population across different education levels and ethnic groups.
-   - **Key Features:** Tree plots representing education levels and bubble density indicating population size. Bar charts show the ethnic distribution of male students.
+**Male students**
 ![Man Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/ed4ea0a4-dfd5-4dc7-a251-947e59e152dd)
 
-
-2. **Female Population Analysis:**
-   - **Description:** This dashboard visualizes the distribution of the female population across different education levels and ethnic groups.
-   - **Key Features:** Similar to the male analysis, this dashboard includes tree plots and bar charts to represent the demographic distribution of female students.
+**Female students**
 ![Woman Story](https://github.com/shagoftakhan1605/College-Enrollment-Analysis/assets/173546811/33c4886a-e50e-4bfa-a65d-248570a264ae)
 
+---
 
-### Analysis Insights
+## Data Structure
 
-- **Male Population:**
-  - Higher density near the outer rings of the tree plot indicates a larger male population at undergraduate levels compared to graduate levels.
-  - White men have the highest representation, with minority groups like Hispanic and African American men having lower enrollment numbers, especially in graduate programs.
+* `ID`: institution identifier
+* `Level of Student`: student level code. Rows overlap: for every institution, the counts for code 1 equal the sum of codes 2 and 12, so code 1 is all students, 2 is undergraduate and 12 is graduate. Other codes are further sub-groups.
+* `Graduate Level of Student`: a second level code
+* 20 count columns: men and women in each ethnic group (American Indian or Alaska Native, Asian, Black or African American, Hispanic, Native Hawaiian or Pacific Islander, White, two or more races, unknown, non-resident), plus total men and total women
 
-- **Female Population:**
-  - Similar trends are observed for the female population, with higher enrollment at the undergraduate level.
-  - White women dominate the enrollment statistics, with lower representation from minority groups in graduate programs.
+Because the rows include both totals and sub-groups, summing all rows counts the same students several times. Totals should be taken from one level code at a time.
 
+---
 
-## Project Structure
+## Key Figures
 
-1. **Database Creation and Management:**
-   - **Objective:** Establish a robust database to manage the college enrollment dataset efficiently.
-   - **Tool Used:** MySQL
-   - **Details:** The dataset was imported into a MySQL database to enable efficient querying and management.
+Calculated from the CSV with level codes 1, 2 and 12 (rows with second level code 3641 excluded):
 
-2. **Data Analysis and Visualization:**
-   - **Objective:** Create dynamic and interactive visualizations to analyze and present the enrollment data.
-   - **Tool Used:** Tableau
-   - **Details:** Tableau was connected to the MySQL database to enable real-time updates and dynamic data interactions. Two dashboards were created to visualize the enrollment demographics.
+| | Men | Women |
+| --- | --- | --- |
+| All students | 9.9 million | 14.1 million |
+| Undergraduate | 8.5 million | 11.8 million |
+| Graduate | 1.4 million | 2.3 million |
 
-## Tools and Technologies
+Share of each group (%):
 
-- **MySQL:** Used to create and manage the database, and to handle data imports and queries.
-- **Tableau:** Used for data visualization, creating interactive dashboards that reflect real-time data updates.
+| Group | Undergrad men | Graduate men | Undergrad women | Graduate women |
+| --- | --- | --- | --- | --- |
+| White | 49.1 | 47.9 | 46.5 | 51.0 |
+| Hispanic | 20.1 | 9.6 | 22.1 | 11.4 |
+| Black or African American | 10.5 | 8.7 | 13.4 | 12.9 |
+| Asian | 7.2 | 7.3 | 6.2 | 6.3 |
+| Non-resident | 3.4 | 17.0 | 2.2 | 8.3 |
 
-## Database Management Code (MySQL)
+* Women outnumber men at both levels (about 59% of all students).
+* White students are the largest group for both sexes.
+* The Hispanic share roughly halves from undergraduate to graduate level, for both men and women.
+* Non-resident students make up a much larger share at graduate level, especially among men (17%).
 
-```sql
--- Create database
-CREATE DATABASE uni_demo;
+---
 
--- Use the database
-USE uni_demo;
+## How to Run
 
--- Create table
-CREATE TABLE demo_table (
-    ID INT,
-    Level_of_Student VARCHAR(255),
-    Graduate_Level_of_Student VARCHAR(255),
-    Total_Men INT,
-    Total_Women INT,
-    American_Indian_Alaskan_Men INT,
-    American_Indian_Alaskan_Women INT,
-    Asian_Men INT,
-    Asian_Women INT,
-    African_American_Men INT,
-    African_American_Women INT,
-    Hispanic_Men INT,
-    Hispanic_Women INT,
-    Hawaiian_or_Pacific_Islander_Men INT,
-    Hawaiian_or_Pacific_Islander_Women INT,
-    White_Men INT,
-    White_Women INT,
-    Mixed_Race_Men INT,
-    Mixed_Race_Women INT,
-    Unknown_Race_Men INT,
-    Unknown_Race_Women INT,
-    Non_Resident_Alien_Men INT,
-    Non_Resident_Alien_Women INT
-);
+1. **MySQL:** copy `Dataset - 2021.csv` into MySQL's secure upload folder (the script uses `C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/`; change the path if yours differs), then run `database.sql`.
+2. **Tableau:** open `College Enrollment Tableau Workbook.twb`. It connects to MySQL on `localhost:3306`, database `uni_demo`; enter your own MySQL username and password when asked.
+3. Open the **Man Story** and **Woman Story** tabs.
 
--- Import data from CSV file
-LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Dataset - 2021.csv'
-INTO TABLE demo_table
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(ID, Level_of_Student, Graduate_Level_of_Student, Total_Men, Total_Women, 
- American_Indian_Alaskan_Men, American_Indian_Alaskan_Women, Asian_Men, Asian_Women,
- African_American_Men, African_American_Women, Hispanic_Men, Hispanic_Women,
- Hawaiian_or_Pacific_Islander_Men, Hawaiian_or_Pacific_Islander_Women, White_Men, White_Women,
- Mixed_Race_Men, Mixed_Race_Women, Unknown_Race_Men, Unknown_Race_Women,
- Non_Resident_Alien_Men, Non_Resident_Alien_Women);
-```
+---
 
+## Limitations
 
-## How to Run the Project
+* Level codes are numeric and their full meaning is not documented in this repository; only codes 1, 2 and 12 are interpreted above
+* Check that each Tableau view filters to one level code, to avoid counting students more than once
+* Data source: Kaggle (link *to be added*)
 
-1. **Set up the MySQL Database:**
-   - Install MySQL Server.
-   - Use the provided SQL code to create the database and table, and to load the data from the CSV file.
+---
 
-2. **Set up Tableau:**
-   - Install Tableau.
-   - Connect Tableau to the MySQL database.
-   - Import the provided Tableau workbook (`Admission.twb`) to visualize the data.
+## Tools
 
-3. **Analyze the Data:**
-   - Open the Tableau workbook to view and interact with the dashboards.
-   - Explore the different visualizations to understand the demographic distribution of the student population.
+MySQL, Tableau, Python (pandas, for the figures above)
 
-## Conclusion
+## License
 
-This project demonstrates a comprehensive approach to managing and visualizing college enrollment data. By integrating MySQL and Tableau, it provides real-time insights into student demographics, aiding in strategic decision-making for enrollment management.
-
-## Acknowledgments
-
-- Thanks to Kaggle for providing the data and resources.
-- Special thanks to the Tableau community for their support and resources.
-
-By following these instructions, users should be able to recreate the analysis and gain insights from the data. The provided MySQL code and Tableau workbook are essential components of this project, ensuring the database is properly set up and the visualizations are accurately represented.
+Apache License 2.0 (see [LICENSE](LICENSE)).
